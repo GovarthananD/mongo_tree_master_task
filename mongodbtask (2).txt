@@ -1,0 +1,199 @@
+treedb> db.users.find().pretty();
+[
+  {
+    _id: ObjectId("64c7f847da725301f08e9ae0"),
+    id: '1',
+    product_name: 'Intelligent chips',
+    product_price: '655.00',
+    product_material: 'concrete',
+    product_color: 'mint_green'
+  },
+  {
+    _id: ObjectId("64c7fb37da725301f08e9ae1"),
+    id: '2',
+    product_name: 'practical fresh sausages',
+    product_price: '911.0',
+    product_material: 'cotton',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c7fb37da725301f08e9ae2"),
+    id: '3',
+    product_name: 'refind steel car',
+    product_price: '690.00',
+    product_material: 'cotton',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c7fb37da725301f08e9ae3"),
+    id: '4',
+    product_name: 'gorgeous plastic pants'
+  },
+  {
+    _id: ObjectId("64c805c5da725301f08e9ae4"),
+    id: '5',
+    product_name: 'pencil',
+    product_price: '500.00',
+    product_material: 'soft',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c80661da725301f08e9ae5"),
+    id: '6',
+    product_name: 'heater',
+    product_price: '700',
+    product_material: 'plastic',
+    product_color: 'green'
+  },
+  {
+    _id: ObjectId("64c806ccda725301f08e9ae6"),
+    id: '7',
+    product_name: 'hero pen',
+    product_price: '900',
+    product_material: 'soft',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c80747da725301f08e9ae7"),
+    id: '8',
+    product_name: 'charger',
+    product_price: '300.00',
+    product_material: 'soft',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c807c2da725301f08e9ae8"),
+    id: '9',
+    product_name: 'soundbar',
+    product_price: '1000.00',
+    product_material: 'plastic',
+    product_color: 'black'
+  },
+  {
+    _id: ObjectId("64c807f9da725301f08e9ae9"),
+    id: '10',
+    product_name: 'pillow',
+    product_price: '100.00',
+    product_material: 'soft',
+    product_color: 'yellow'
+  },
+  {
+    _id: ObjectId("64c80815da725301f08e9aea"),
+    id: '11',
+    product_name: 'corckball',
+    product_price: '130.00',
+    product_material: 'stich',
+    product_color: 'red'
+  },
+  {
+    _id: ObjectId("64c80857da725301f08e9aeb"),
+    id: '12',
+    product_name: 'puma shoes',
+    product_price: '250.00',
+    product_material: 'soft',
+    product_color: 'violet'
+  },
+  {
+    _id: ObjectId("64c80883da725301f08e9aec"),
+    id: '13',
+    product_name: 'thumbels',
+    product_price: '399.00',
+    product_material: 'steel',
+    product_color: 'green'
+  }
+]
+treedb> db.users.find({product_price:{$gt:400,$lt:800}});
+
+treedb> db.users.find($and{[$gt:400,$lt:800]});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:18)
+
+> 1 | db.users.find($and{[$gt:400,$lt:800]});
+    |                   ^
+  2 |
+
+treedb> db.users.find({$and[$gt:400,$lt:800]});
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:19)
+
+> 1 | db.users.find({$and[$gt:400,$lt:800]});
+    |                    ^
+  2 |
+
+treedb> db.users.find({$and:[{product_price:{$gt:400}},{product_price:{$lt:800}}]});
+
+treedb> db.users.find({$and:[{product_price:{$lt:400}},{product_price:{$gt:600}}]});
+
+treedb> db.users.find({product_price:{$gt:500}});
+
+treedb> db.users.find({product_name},{product_material});
+ReferenceError: product_name is not defined
+treedb> db.users.find($and:[{product_name:1},{product_material:1}]);
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:18)
+
+> 1 | db.users.find($and:[{product_name:1},{product_material:1}]);
+    |                   ^
+  2 |
+
+treedb> db.users.find({$and:[{product_name:1},{product_material:1}]});
+
+treedb> db.users.find({id:'10'});
+[
+  {
+    _id: ObjectId("64c807f9da725301f08e9ae9"),
+    id: '10',
+    product_name: 'pillow',
+    product_price: '100.00',
+    product_material: 'soft',
+    product_color: 'yellow'
+  }
+]
+treedb> db.users.find({product_name:1,product_material:1}).pretty();
+
+treedb> db.users.find({product_material:'soft'});
+[
+  {
+    _id: ObjectId("64c805c5da725301f08e9ae4"),
+    id: '5',
+    product_name: 'pencil',
+    product_price: '500.00',
+    product_material: 'soft',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c806ccda725301f08e9ae6"),
+    id: '7',
+    product_name: 'hero pen',
+    product_price: '900',
+    product_material: 'soft',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c80747da725301f08e9ae7"),
+    id: '8',
+    product_name: 'charger',
+    product_price: '300.00',
+    product_material: 'soft',
+    product_color: 'indigo'
+  },
+  {
+    _id: ObjectId("64c807f9da725301f08e9ae9"),
+    id: '10',
+    product_name: 'pillow',
+    product_price: '100.00',
+    product_material: 'soft',
+    product_color: 'yellow'
+  },
+  {
+    _id: ObjectId("64c80857da725301f08e9aeb"),
+    id: '12',
+    product_name: 'puma shoes',
+    product_price: '250.00',
+    product_material: 'soft',
+    product_color: 'violet'
+  }
+]
+treedb> db.users.find({product_color:'indigo',product_price:492.00});
+
+treedb>
